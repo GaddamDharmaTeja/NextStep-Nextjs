@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "clerkId": "local-admin",
+      "email": "admin@nextstep.local",
+      "name": "NextStep Admin",
+      "phone": null,
+      "role": "admin",
+      "createdAt": "2026-05-12T00:00:00.000Z"
+    }
+  ],
+  "inquiries": [],
+  "programs": [
+    {
+      "id": 1,
+      "title": "MBA in Canada",
+      "description": "Career-focused MBA pathways in top Canadian business schools.",
+      "country": "Canada",
+      "duration": "2 Years",
+      "imageUrl": "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop",
+      "featured": true,
+      "createdAt": "2026-05-12T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "MS in Australia",
+      "description": "Industry-aligned postgraduate programs with strong internship options.",
+      "country": "Australia",
+      "duration": "2 Years",
+      "imageUrl": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop",
+      "featured": true,
+      "createdAt": "2026-05-12T00:00:00.000Z"
+    }
+  ],
+  "gallery": [],
+  "testimonials": []
+}
