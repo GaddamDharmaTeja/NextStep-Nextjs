@@ -8,10 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { signIn } from "@/lib/api";
-import { withBasePath } from "@/lib/runtime";
 import { useQueryClient } from "@tanstack/react-query";
 import { getGetMyProfileQueryKey } from "@workspace/api-client-react";
 import { ArrowRight, Globe2, ShieldCheck, Sparkles } from "lucide-react";
+import { BrandLogo } from "@/components/layout/brand-logo";
 
 const signInSchema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -43,23 +43,22 @@ export default function SignInPage() {
 
   return (
     <div className="relative min-h-[100dvh] overflow-hidden bg-[#081120] text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(27,143,138,0.26),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(228,170,25,0.2),_transparent_28%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(14,47,109,0.35),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(217,163,26,0.22),_transparent_28%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-white/10" />
 
       <div className="relative mx-auto grid min-h-[100dvh] max-w-7xl items-center gap-10 px-5 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
         <section className="hidden lg:block">
           <div className="max-w-2xl">
             <Link href="/" className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur">
-              <img
-                src={withBasePath("/logo.svg")}
-                alt="NextStep Logo"
-                className="h-8 w-8 rounded-full bg-white/90 p-1"
+              <BrandLogo
+                frameClassName="flex h-[56px] items-center rounded-xl bg-white px-3"
+                imageClassName="h-10 w-auto max-w-[170px] object-contain"
               />
               NextStep Global
             </Link>
 
             <div className="mt-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#e4aa19]/25 bg-[#e4aa19]/10 px-4 py-2 text-sm font-semibold text-[#f6ca68]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#d9a31a]/25 bg-[#d9a31a]/10 px-4 py-2 text-sm font-semibold text-[#f3cf73]">
                 <Sparkles className="h-4 w-4" />
                 Student portal and admin access
               </div>
@@ -75,7 +74,7 @@ export default function SignInPage() {
 
             <div className="mt-12 grid max-w-xl gap-4">
               <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-                <div className="rounded-xl bg-[#1b8f8a]/20 p-3 text-[#7fe0da]">
+                <div className="rounded-xl bg-[#173f86]/25 p-3 text-[#a8c4f3]">
                   <Globe2 className="h-5 w-5" />
                 </div>
                 <div>
@@ -106,14 +105,12 @@ export default function SignInPage() {
             <CardHeader className="space-y-5 px-7 pb-2 pt-7 sm:px-8 sm:pt-8">
               <div className="flex items-center justify-between">
                 <Link href="/" className="inline-flex items-center gap-3 lg:hidden">
-                  <img
-                    src={withBasePath("/logo.svg")}
-                    alt="NextStep Logo"
-                    className="h-10 w-10"
+                  <BrandLogo
+                    frameClassName="flex h-[58px] items-center rounded-xl bg-white px-3 shadow-[0_8px_24px_rgba(15,23,42,0.08)]"
+                    imageClassName="h-10 w-auto max-w-[170px] object-contain"
                   />
-                  <span className="font-serif text-2xl font-bold text-[#121d32]">NextStep</span>
                 </Link>
-                <div className="rounded-full bg-[#eef3fb] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#1b8f8a]">
+                <div className="rounded-full bg-[#eef3fb] px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#a77400]">
                   Sign In
                 </div>
               </div>
@@ -139,7 +136,7 @@ export default function SignInPage() {
                           type="email"
                           autoComplete="email"
                           placeholder="you@example.com"
-                          className="h-12 rounded-xl border-slate-200 bg-white text-base shadow-none focus-visible:ring-[#1b8f8a]"
+                          className="h-12 rounded-xl border-slate-200 bg-white text-base shadow-none focus-visible:ring-[#d9a31a]"
                           {...field}
                         />
                       </FormControl>
@@ -158,7 +155,7 @@ export default function SignInPage() {
                           type="password"
                           autoComplete="current-password"
                           placeholder="Enter your password"
-                          className="h-12 rounded-xl border-slate-200 bg-white text-base shadow-none focus-visible:ring-[#1b8f8a]"
+                          className="h-12 rounded-xl border-slate-200 bg-white text-base shadow-none focus-visible:ring-[#d9a31a]"
                           {...field}
                         />
                       </FormControl>
@@ -168,7 +165,7 @@ export default function SignInPage() {
 
                   <Button
                     type="submit"
-                    className="h-13 w-full rounded-xl border border-[#121d32] bg-[#e4aa19] text-base font-semibold text-black shadow-none transition hover:bg-[#d89e12]"
+                    className="h-13 w-full rounded-xl border border-[#0e2f6d] bg-[#d9a31a] text-base font-semibold text-[#081120] shadow-none transition hover:bg-[#c79414]"
                     disabled={form.formState.isSubmitting}
                   >
                     {form.formState.isSubmitting ? "Signing in..." : "Enter dashboard"}
@@ -178,7 +175,7 @@ export default function SignInPage() {
               </Form>
 
               <div className="mt-7 flex flex-col gap-3 border-t border-slate-200 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-                <Link href="/sign-up" className="font-semibold text-[#1b8f8a] hover:text-[#146b67]">
+                <Link href="/sign-up" className="font-semibold text-[#0e2f6d] hover:text-[#17458d]">
                   Create account
                 </Link>
                 <Link href="/" className="text-slate-500 hover:text-[#121d32]">

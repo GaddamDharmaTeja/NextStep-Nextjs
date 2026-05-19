@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { signOut } from "@/lib/api";
 import { useQueryClient } from "@tanstack/react-query";
+import { BrandLogo } from "./brand-logo";
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: profile, isLoading } = useGetMyProfile({
@@ -76,21 +77,26 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
 
   const roleTone =
     profile.role === "owner"
-      ? "bg-amber-400/15 text-amber-200 ring-1 ring-amber-300/25"
-      : "bg-cyan-400/15 text-cyan-100 ring-1 ring-cyan-300/20";
+      ? "bg-[#d9a31a]/18 text-[#f7d36b] ring-1 ring-[#e3bc57]/25"
+      : "bg-[#173f86]/30 text-[#d8e7ff] ring-1 ring-[#9ab8ef]/20";
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(14,116,144,0.10),_transparent_20%),radial-gradient(circle_at_bottom_right,_rgba(245,158,11,0.10),_transparent_20%),linear-gradient(180deg,_#f8fbff_0%,_#eef4ff_45%,_#f8fafc_100%)] text-slate-950 lg:flex">
-      <aside className="flex w-full shrink-0 flex-col overflow-hidden border-b border-white/50 bg-[linear-gradient(180deg,#0c1a31_0%,#132848_55%,#14355e_100%)] text-primary-foreground shadow-[0_25px_80px_rgba(15,23,42,0.18)] lg:min-h-screen lg:w-80 lg:border-b-0 lg:border-r lg:border-r-white/10">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(14,47,109,0.10),_transparent_20%),radial-gradient(circle_at_bottom_right,_rgba(217,163,26,0.14),_transparent_18%),linear-gradient(180deg,_#fdfbf5_0%,_#f5f8ff_42%,_#f9fafc_100%)] text-slate-950 lg:flex">
+      <aside className="flex w-full shrink-0 flex-col overflow-hidden border-b border-white/50 bg-[linear-gradient(180deg,#09172f_0%,#0e2f6d_55%,#17458d_100%)] text-primary-foreground shadow-[0_25px_80px_rgba(15,23,42,0.18)] lg:min-h-screen lg:w-80 lg:border-b-0 lg:border-r lg:border-r-white/10">
         <div className="border-b border-white/10 px-6 py-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan-200/80">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f0d28c]">
                 Control Center
               </div>
-              <div className="mt-2 font-serif text-3xl font-bold text-white">NextStep Admin</div>
+              <div className="mt-3">
+                <BrandLogo
+                  frameClassName="flex h-[84px] items-center rounded-2xl bg-white px-3 shadow-[0_12px_32px_rgba(8,17,32,0.25)]"
+                  imageClassName="h-16 w-auto max-w-[220px] object-contain"
+                />
+              </div>
             </div>
-            <div className="rounded-2xl bg-white/10 p-3 text-white">
+            <div className="rounded-2xl bg-white/10 p-3 text-[#f0d28c]">
               <ShieldCheck className="h-6 w-6" />
             </div>
           </div>
@@ -156,7 +162,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
         <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl">
           <div className="flex items-center justify-between gap-4 px-5 py-4 sm:px-8">
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">Operations</div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#a77400]">Operations</div>
               <h1 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900">Admin Portal</h1>
             </div>
             <div className="hidden items-center gap-3 md:flex">

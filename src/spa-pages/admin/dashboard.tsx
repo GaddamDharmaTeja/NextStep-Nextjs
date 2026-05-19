@@ -16,8 +16,8 @@ const statCards = [
   {
     key: "totalUsers",
     label: "Total Users",
-    accent: "from-sky-500/15 to-cyan-500/10",
-    iconTone: "bg-sky-500/15 text-sky-700",
+    accent: "from-[#173f86]/15 to-[#9bbcf1]/10",
+    iconTone: "bg-[#173f86]/12 text-[#0e2f6d]",
     icon: Users,
   },
   {
@@ -30,15 +30,15 @@ const statCards = [
   {
     key: "totalPrograms",
     label: "Programs",
-    accent: "from-violet-500/15 to-fuchsia-500/10",
-    iconTone: "bg-violet-500/15 text-violet-700",
+    accent: "from-[#0e2f6d]/12 to-[#d9a31a]/10",
+    iconTone: "bg-[#d9a31a]/15 text-[#a77400]",
     icon: GraduationCap,
   },
   {
     key: "totalGalleryImages",
     label: "Gallery Images",
-    accent: "from-emerald-500/15 to-teal-500/10",
-    iconTone: "bg-emerald-500/15 text-emerald-700",
+    accent: "from-[#d9a31a]/12 to-[#f2e4b7]/16",
+    iconTone: "bg-[#d9a31a]/15 text-[#a77400]",
     icon: ImageIcon,
   },
 ] as const;
@@ -57,13 +57,13 @@ export default function AdminDashboardPage() {
   return (
     <AdminLayout>
       <div className="space-y-8">
-        <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(135deg,rgba(15,23,42,0.97)_0%,rgba(30,58,95,0.95)_48%,rgba(14,116,144,0.88)_100%)] px-6 py-7 text-white shadow-[0_25px_80px_rgba(15,23,42,0.12)] sm:px-8">
-          <div className="absolute -right-10 top-0 h-40 w-40 rounded-full bg-amber-300/20 blur-3xl" />
-          <div className="absolute bottom-0 left-1/3 h-32 w-32 rounded-full bg-cyan-300/15 blur-3xl" />
+        <section className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-[linear-gradient(135deg,rgba(8,17,32,0.97)_0%,rgba(14,47,109,0.95)_48%,rgba(24,69,141,0.9)_100%)] px-6 py-7 text-white shadow-[0_25px_80px_rgba(15,23,42,0.12)] sm:px-8">
+          <div className="absolute -right-10 top-0 h-40 w-40 rounded-full bg-[#e0b43b]/20 blur-3xl" />
+          <div className="absolute bottom-0 left-1/3 h-32 w-32 rounded-full bg-[#9bbcf1]/15 blur-3xl" />
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-slate-100/90">
-                <Sparkles className="h-4 w-4 text-amber-300" />
+                <Sparkles className="h-4 w-4 text-[#e0b43b]" />
                 Modern operations dashboard
               </div>
               <h2 className="mt-6 font-serif text-4xl font-bold tracking-tight sm:text-5xl">
@@ -86,7 +86,7 @@ export default function AdminDashboardPage() {
               <div className="rounded-[1.4rem] border border-white/15 bg-white/10 p-5 backdrop-blur">
                 <div className="text-sm text-slate-300">Leadership mode</div>
                 <div className="mt-3 inline-flex items-center gap-2 text-lg font-semibold">
-                  <Crown className="h-5 w-5 text-amber-300" />
+                  <Crown className="h-5 w-5 text-[#e0b43b]" />
                   Active
                 </div>
               </div>
@@ -222,7 +222,7 @@ export default function AdminDashboardPage() {
                   Social proof matters. Make sure the public-facing story matches your strongest student outcomes.
                 </p>
               </div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700">
+              <div className="inline-flex items-center gap-2 text-sm font-semibold text-[#0e2f6d]">
                 Open the relevant section from the sidebar
                 <ArrowUpRight className="h-4 w-4" />
               </div>

@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -112,27 +111,22 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#f4f7fb] text-[#0f1b2f]">
-      <PublicHeader active="home" />
+      <PublicHeader active="home" variant="overlay" />
 
       <section
         id="home"
-        className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b-[28px] border-[#1b8f8a] bg-[#101b31]"
+        className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b-[28px] border-[#d9a31a] bg-[#09172f] pt-28 sm:pt-32"
       >
         <div
           className="absolute inset-0 bg-cover bg-center opacity-45"
           style={{ backgroundImage: `url(${withBasePath("/hero-student.jpg")})` }}
         />
-        <div className="absolute inset-0 bg-[#101b31]/78" />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(9,23,47,0.88),rgba(14,47,109,0.82))]" />
 
         <div className="relative mx-auto flex min-h-[calc(100vh-108px)] max-w-7xl items-center px-5 py-16 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-            className="max-w-3xl text-white"
-          >
+          <div className="max-w-3xl text-white">
             <h1 className="font-serif text-6xl font-bold leading-[1.05] md:text-7xl lg:text-8xl">
-              {content?.heroTitle || "Your global future"} <span className="text-[#e4aa19]">{content?.heroAccent || "starts here."}</span>
+              {content?.heroTitle || "Your global future"} <span className="text-[#e0b43b]">{content?.heroAccent || "starts here."}</span>
             </h1>
             <p className="mt-8 max-w-2xl text-xl leading-8 text-white md:text-2xl">
               {content?.heroSubtitle || "We do not just process visas; we architect futures. Partner with passionate mentors dedicated to guiding you to the world's top universities."}
@@ -141,7 +135,7 @@ export default function HomePage() {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Button
                 size="lg"
-                className="h-14 rounded-md border border-[#e4aa19] bg-[#e4aa19] px-8 text-lg font-semibold text-black shadow-none hover:bg-[#d89e12]"
+                className="h-14 rounded-md border border-[#d9a31a] bg-[#d9a31a] px-8 text-lg font-semibold text-[#081120] shadow-none hover:bg-[#c79414]"
                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               >
                 {content?.primaryCta || "Get Free Assessment"}
@@ -155,11 +149,11 @@ export default function HomePage() {
                 {content?.secondaryCta || "Explore Services"}
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-[#1b8f8a] py-14 text-white">
+      <section className="bg-[linear-gradient(90deg,#0e2f6d_0%,#173f86_52%,#d9a31a_100%)] py-14 text-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-white/20 px-5 text-center md:grid-cols-4 lg:px-8">
           {metrics.map((metric) => (
             <div key={metric.label} className="px-4 py-4">
@@ -183,13 +177,7 @@ export default function HomePage() {
             {services.map((service, index) => {
               const Icon = serviceIcons[index] || HandHeart;
               return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
-                >
+                <div key={service.title}>
                   <Card className="h-full rounded-lg border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                     <CardContent className="p-10">
                       <div className="flex h-14 w-14 items-center justify-center rounded-md bg-slate-100 text-[#101b31]">
@@ -199,7 +187,7 @@ export default function HomePage() {
                       <p className="mt-6 text-lg leading-8 text-slate-600">{service.text}</p>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -226,13 +214,7 @@ export default function HomePage() {
 
           <div className="mt-14 grid gap-7 md:grid-cols-3">
             {featuredPrograms.map((prog, idx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08 }}
-                key={prog.id}
-              >
+              <div key={prog.id}>
                 <Card className="h-full overflow-hidden rounded-lg border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                   <div className="relative h-56 overflow-hidden bg-slate-100">
                     {prog.imageUrl ? (
@@ -265,7 +247,7 @@ export default function HomePage() {
                     </Button>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -308,13 +290,7 @@ export default function HomePage() {
 
           <div className="grid gap-7 md:grid-cols-3">
             {featuredTestimonials.map((testimonial, idx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08 }}
-                key={testimonial.id}
-              >
+              <div key={testimonial.id}>
                 <Card className="h-full rounded-lg border-slate-200 bg-white shadow-sm">
                   <CardContent className="p-8">
                     <Quote className="h-10 w-10 text-[#e4aa19]" />
@@ -340,7 +316,7 @@ export default function HomePage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -485,11 +461,10 @@ export default function HomePage() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
               <img
-                src={withBasePath("/logo.svg")}
-                alt="NextStep Logo"
-                className="h-8 w-8 brightness-200"
+                src={withBasePath("/nextstep-wordmark.png")}
+                alt="NextStep Global Educational Services"
+                className="h-14 w-auto rounded-xl bg-white p-1.5 object-contain"
               />
-              <span className="font-serif text-2xl font-bold text-white">NextStep</span>
             </div>
             <p className="mt-5 max-w-md leading-7">{content?.footerTagline || "Global education guidance shaped by mentorship, clarity, and long-term student outcomes."}</p>
             <div className="mt-6 text-sm">(c) {new Date().getFullYear()} NextStep. All rights reserved.</div>

@@ -8,7 +8,6 @@ import { getGetMyProfileQueryKey } from "@workspace/api-client-react";
 import { listMyInquiries, signOut } from "@/lib/api";
 import { listMyStudentDocuments, uploadStudentDocument } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { withBasePath } from "@/lib/runtime";
 import {
   ArrowUpRight,
   BellRing,
@@ -22,6 +21,7 @@ import {
   Sparkles,
   UserRound,
 } from "lucide-react";
+import { BrandLogo } from "@/components/layout/brand-logo";
 
 function getStatusClasses(status: "pending" | "contacted" | "resolved") {
   if (status === "resolved") {
@@ -93,15 +93,16 @@ export default function UserPortalPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(14,116,144,0.16),_transparent_22%),radial-gradient(circle_at_top_right,_rgba(245,158,11,0.16),_transparent_20%),linear-gradient(180deg,_#f8fafc_0%,_#eef4ff_42%,_#f7fafc_100%)] text-slate-950">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(14,47,109,0.16),_transparent_22%),radial-gradient(circle_at_top_right,_rgba(217,163,26,0.16),_transparent_20%),linear-gradient(180deg,_#fdfcf7_0%,_#eef4ff_42%,_#f7fafc_100%)] text-slate-950">
       <header className="sticky top-0 z-20 border-b border-white/50 bg-white/75 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#1e3a5f_0%,#0f766e_100%)] shadow-lg shadow-cyan-950/15">
-              <img src={withBasePath("/logo.svg")} alt="Logo" className="h-6 w-6" />
-            </div>
+            <BrandLogo
+              frameClassName="flex h-[58px] items-center rounded-2xl bg-white px-3 shadow-lg shadow-slate-900/10"
+              imageClassName="h-10 w-auto max-w-[170px] object-contain"
+            />
             <div>
-              <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-sky-700">Student Portal</div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#a77400]">Student Portal</div>
               <div className="text-2xl font-semibold tracking-tight text-slate-900">NextStep</div>
             </div>
           </div>
@@ -124,9 +125,9 @@ export default function UserPortalPage() {
       </header>
 
       <main className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
-        <section className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-[linear-gradient(135deg,rgba(15,23,42,0.96)_0%,rgba(30,58,95,0.94)_45%,rgba(14,116,144,0.88)_100%)] px-6 py-8 text-white shadow-[0_30px_80px_rgba(15,23,42,0.18)] sm:px-8 lg:px-10">
-          <div className="absolute -right-10 top-0 h-40 w-40 rounded-full bg-amber-300/20 blur-3xl" />
-          <div className="absolute bottom-0 left-1/3 h-32 w-32 rounded-full bg-cyan-300/15 blur-3xl" />
+        <section className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-[linear-gradient(135deg,rgba(8,17,32,0.97)_0%,rgba(14,47,109,0.94)_48%,rgba(24,69,141,0.9)_100%)] px-6 py-8 text-white shadow-[0_30px_80px_rgba(15,23,42,0.18)] sm:px-8 lg:px-10">
+          <div className="absolute -right-10 top-0 h-40 w-40 rounded-full bg-[#e0b43b]/20 blur-3xl" />
+          <div className="absolute bottom-0 left-1/3 h-32 w-32 rounded-full bg-[#9bbcf1]/15 blur-3xl" />
 
           <div className="relative grid gap-8 lg:grid-cols-[1.6fr_0.9fr] lg:items-end">
             <div className="space-y-5">

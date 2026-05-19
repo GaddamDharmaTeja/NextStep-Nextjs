@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { HandHeart, Globe2, ShieldCheck, ArrowRight } from "lucide-react";
 import { getSiteContent } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
-import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 export default function ServicesPage() {
@@ -16,9 +15,9 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-[#f4f7fb] text-[#0f1b2f]">
       <PublicHeader active="services" />
 
-      <section className="border-b border-slate-200 bg-[linear-gradient(180deg,#f8fbff_0%,#eef4ff_100%)] py-22">
+      <section className="border-b border-slate-200 bg-[linear-gradient(180deg,#fffdf7_0%,#eef4ff_100%)] py-22">
         <div className="mx-auto max-w-7xl px-5 text-center lg:px-8">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#1b8f8a]/15 bg-[#1b8f8a]/8 px-4 py-2 text-sm font-semibold text-[#1b8f8a]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#d9a31a]/20 bg-[#d9a31a]/10 px-4 py-2 text-sm font-semibold text-[#a77400]">
             <HandHeart className="h-4 w-4" />
             NextStep Services
           </div>
@@ -37,13 +36,7 @@ export default function ServicesPage() {
             {services.map((service, index) => {
               const Icon = serviceIcons[index] || HandHeart;
               return (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 22 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
-                >
+                <div key={service.title}>
                   <Card className="h-full rounded-lg border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
                     <CardContent className="p-10">
                       <div className="flex h-14 w-14 items-center justify-center rounded-md bg-slate-100 text-[#101b31]">
@@ -53,7 +46,7 @@ export default function ServicesPage() {
                       <p className="mt-6 text-lg leading-8 text-slate-600">{service.text}</p>
                     </CardContent>
                   </Card>
-                </motion.div>
+                </div>
               );
             })}
           </div>
@@ -64,7 +57,7 @@ export default function ServicesPage() {
               Tell us your target destination, academic background, and timeline. We&apos;ll help you plan the right next step with a practical roadmap.
             </p>
             <Link href="/contact">
-              <Button className="mt-8 h-12 rounded-md border border-[#e4aa19] bg-[#e4aa19] px-6 text-base font-semibold text-black shadow-none hover:bg-[#d89e12]">
+              <Button className="mt-8 h-12 rounded-md border border-[#d9a31a] bg-[#d9a31a] px-6 text-base font-semibold text-[#081120] shadow-none hover:bg-[#c79414]">
                 Start Free Assessment
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

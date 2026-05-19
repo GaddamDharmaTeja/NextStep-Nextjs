@@ -29,6 +29,7 @@ import AdminNotificationsPage from "./spa-pages/admin/notifications";
 import AdminOwnerSettingsPage from "./spa-pages/admin/owner-settings";
 import AdminAuditLogsPage from "./spa-pages/admin/audit-logs";
 import AdminDocumentsPage from "./spa-pages/admin/documents";
+import NotFoundPage from "./spa-pages/not-found";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +61,7 @@ function AppRouter() {
       <Route path="/admin/settings" component={AdminOwnerSettingsPage} />
       <Route path="/admin/audit-logs" component={AdminAuditLogsPage} />
       <Route path="/admin/documents" component={AdminDocumentsPage} />
-      <Route>Not Found</Route>
+      <Route component={NotFoundPage} />
     </Switch>
   );
 }
