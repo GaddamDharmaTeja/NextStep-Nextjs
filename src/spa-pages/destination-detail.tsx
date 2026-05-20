@@ -26,10 +26,11 @@ export default function DestinationDetailPage() {
     enabled: Boolean(slug),
     retry: false,
   });
-  const { data: destinations = [] } = useQuery({
+  const { data: destinations } = useQuery({
     queryKey: ["/api/destinations"],
     queryFn: listDestinations,
   });
+  const destinationsList = Array.isArray(destinations) ? destinations : [];
 
   if (isLoading) {
     return <div className="flex min-h-screen items-center justify-center bg-[#f4f7fb]">Loading...</div>;
@@ -39,7 +40,7 @@ export default function DestinationDetailPage() {
     return <Redirect to="/destinations" />;
   }
 
-  const otherDestinations = destinations.filter((entry) => entry.slug !== destination.slug).slice(0, 3);
+  const otherDestinations = destinationsList.filter((entry) => entry.slug !== destination.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#f4f7fb] text-[#0f1b2f]">

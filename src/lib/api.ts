@@ -213,6 +213,14 @@ function normalizeDestinationRecord(record: DestinationRecord): DestinationRecor
   };
 }
 
+function normalizeConsultantRecord(record: ConsultantRecord): ConsultantRecord {
+  return {
+    ...record,
+    countries: asStringArray(record.countries),
+    languages: asStringArray(record.languages),
+  };
+}
+
 function normalizeSiteContentRecord(record: SiteContentRecord): SiteContentRecord {
   return {
     ...record,
@@ -471,9 +479,10 @@ export async function deleteDestination(id: number) {
 }
 
 export async function listConsultants() {
-  return request<ConsultantRecord[]>("/api/consultants", {
+  const data = await request<ConsultantRecord[]>("/api/consultants", {
     method: "GET",
   });
+  return Array.isArray(data) ? data.map(normalizeConsultantRecord) : [];
 }
 
 export async function createConsultant(payload: ConsultantPayload) {

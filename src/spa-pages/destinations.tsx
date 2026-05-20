@@ -18,11 +18,12 @@ import {
 } from "lucide-react";
 
 export default function DestinationsPage() {
-  const { data: destinations = [] } = useQuery({
+  const { data: destinations } = useQuery({
     queryKey: ["/api/destinations"],
     queryFn: listDestinations,
   });
-  const visibleDestinations = destinations.filter((destination) => destination.featured);
+  const destinationsList = Array.isArray(destinations) ? destinations : [];
+  const visibleDestinations = destinationsList.filter((destination) => destination.featured);
 
   return (
     <div className="min-h-screen bg-[#f4f7fb] text-[#0f1b2f]">
