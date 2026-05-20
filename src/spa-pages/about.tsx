@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function AboutPage() {
   const { data: content } = useQuery({ queryKey: ["/api/site-content"], queryFn: getSiteContent });
-  const metrics = content?.metrics || [];
-  const aboutHighlights = content?.aboutHighlights?.length
+  const metrics = Array.isArray(content?.metrics) ? content.metrics : [];
+  const aboutHighlights = Array.isArray(content?.aboutHighlights) && content.aboutHighlights.length
     ? content.aboutHighlights
     : ["Course shortlisting", "Scholarship strategy", "Visa documentation", "Pre-departure briefing"];
 

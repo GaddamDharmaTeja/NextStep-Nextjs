@@ -9,7 +9,7 @@ import { Link } from "wouter";
 export default function ServicesPage() {
   const { data: content } = useQuery({ queryKey: ["/api/site-content"], queryFn: getSiteContent });
   const serviceIcons = [HandHeart, Globe2, ShieldCheck];
-  const services = content?.services || [];
+  const services = Array.isArray(content?.services) ? content.services : [];
 
   return (
     <div className="min-h-screen bg-[#f4f7fb] text-[#0f1b2f]">

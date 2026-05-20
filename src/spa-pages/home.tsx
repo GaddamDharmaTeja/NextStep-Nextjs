@@ -102,10 +102,10 @@ export default function HomePage() {
 
   const featuredPrograms = programsList.filter((p) => p.featured) || programsList.slice(0, 3) || [];
   const featuredTestimonials = testimonialsList.filter((t) => t.featured) || testimonialsList.slice(0, 3) || [];
-  const metrics = content?.metrics || [];
+  const metrics = Array.isArray(content?.metrics) ? content.metrics : [];
   const serviceIcons = [HandHeart, Globe2, ShieldCheck];
-  const services = content?.services || [];
-  const aboutHighlights = content?.aboutHighlights?.length
+  const services = Array.isArray(content?.services) ? content.services : [];
+  const aboutHighlights = Array.isArray(content?.aboutHighlights) && content.aboutHighlights.length
     ? content.aboutHighlights
     : ["Course shortlisting", "Scholarship strategy", "Visa documentation", "Pre-departure briefing"];
 

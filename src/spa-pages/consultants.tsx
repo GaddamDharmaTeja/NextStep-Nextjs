@@ -8,11 +8,12 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, BadgeCheck, Globe2, Languages, Sparkles, UsersRound } from "lucide-react";
 
 export default function ConsultantsPage() {
-  const { data: consultants = [] } = useQuery({
+  const { data: consultants } = useQuery({
     queryKey: ["/api/consultants"],
     queryFn: listConsultants,
   });
-  const visibleConsultants = consultants.filter((consultant) => consultant.featured);
+  const consultantsList = Array.isArray(consultants) ? consultants : [];
+  const visibleConsultants = consultantsList.filter((consultant) => consultant.featured);
 
   return (
     <div className="min-h-screen bg-[#f4f7fb] text-[#0f1b2f]">
