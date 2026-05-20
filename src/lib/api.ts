@@ -351,9 +351,10 @@ export async function uploadStudentDocument(payload: UploadStudentDocumentPayloa
 }
 
 export async function listMyInquiries() {
-  return request<InquiryRecord[]>("/api/inquiries/mine", {
+  const data = await request<InquiryRecord[]>("/api/inquiries/mine", {
     method: "GET",
   });
+  return Array.isArray(data) ? data : [];
 }
 
 export async function listInquiriesManual() {
@@ -425,7 +426,8 @@ export async function updateNotificationTemplate(
 }
 
 export async function listMyStudentDocuments() {
-  return request<StudentDocumentRecord[]>("/api/student-documents/mine", { method: "GET" });
+  const data = await request<StudentDocumentRecord[]>("/api/student-documents/mine", { method: "GET" });
+  return Array.isArray(data) ? data : [];
 }
 
 export async function listStudentDocuments() {

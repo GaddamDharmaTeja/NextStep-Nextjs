@@ -45,7 +45,7 @@ export default function UserPortalPage() {
     queryFn: listMyInquiries,
     enabled: Boolean(profile),
   });
-  const { data: documents = [] } = useQuery({
+  const { data: documents } = useQuery({
     queryKey: ["/api/student-documents/mine"],
     queryFn: listMyStudentDocuments,
     enabled: Boolean(profile),
@@ -66,8 +66,9 @@ export default function UserPortalPage() {
     return <Redirect to="/admin" />;
   }
 
-  const displayedPrograms = programs?.slice(0, 4) ?? [];
-  const myInquiries = inquiries ?? [];
+  const displayedPrograms = Array.isArray(programs) ? programs.slice(0, 4) : [];
+  const myInquiries = Array.isArray(inquiries) ? inquiries : [];
+  const documentList = Array.isArray(documents) ? documents : [];
   const firstName = profile.name?.trim().split(/\s+/)[0] || "Student";
   const pendingCount = myInquiries.filter((entry) => entry.status === "pending").length;
 
@@ -365,8 +366,8 @@ export default function UserPortalPage() {
                 <Input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" className="max-w-[240px]" onChange={(e) => handleDocumentUpload(e.target.files?.[0] || null)} />
               </div>
               <CardContent className="space-y-3 p-6">
-                {documents.length === 0 && <div className="text-sm text-slate-600">No documents uploaded yet.</div>}
-                {documents.map((doc) => (
+                {documentList.length === 0 && <div className="text-sm text-slate-600">No documents uploaded yet.</div>}
+                {documentList.map((doc) => (
                   <div key={doc.id} className="flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white p-4">
                     <div>
                       <div className="font-medium text-slate-900">{doc.fileName}</div>
