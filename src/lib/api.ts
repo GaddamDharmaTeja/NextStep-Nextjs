@@ -189,6 +189,53 @@ export interface UploadStudentDocumentPayload {
 }
 
 const MAX_UPLOAD_SIZE = 15 * 1024 * 1024;
+
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
+}
+
+function asStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.map((item) => String(item).trim()).filter(Boolean);
+}
+
+function normalizeDestinationRecord(record: DestinationRecord): DestinationRecord {
+  return {
+    ...record,
+    highlights: asStringArray(record.highlights),
+    universities: asStringArray(record.universities),
+    requirements: asStringArray(record.requirements),
+    workOptions: asStringArray(record.workOptions),
+    accent: asString(record.accent, "from-blue-50 to-slate-50"),
+  };
+}
+
+function normalizeSiteContentRecord(record: SiteContentRecord): SiteContentRecord {
+  return {
+    ...record,
+    metrics: Array.isArray(record.metrics)
+      ? record.metrics
+          .map((metric) => ({
+            value: asString(metric?.value),
+            label: asString(metric?.label),
+          }))
+          .filter((metric) => metric.value || metric.label)
+      : [],
+    services: Array.isArray(record.services)
+      ? record.services
+          .map((service) => ({
+            title: asString(service?.title),
+            text: asString(service?.text),
+          }))
+          .filter((service) => service.title || service.text)
+      : [],
+    aboutHighlights: asStringArray(record.aboutHighlights),
+  };
+}
+
 function apiUrl(path: string): string {
   if (!apiBaseUrl || !path.startsWith("/")) {
     return path;
@@ -385,15 +432,17 @@ export async function updateStudentDocument(documentId: string, payload: { statu
 }
 
 export async function listDestinations() {
-  return request<DestinationRecord[]>("/api/destinations", {
+  const data = await request<DestinationRecord[]>("/api/destinations", {
     method: "GET",
   });
+  return Array.isArray(data) ? data.map(normalizeDestinationRecord) : [];
 }
 
 export async function getDestination(slug: string) {
-  return request<DestinationRecord>(`/api/destinations/${slug}`, {
+  const data = await request<DestinationRecord>(`/api/destinations/${slug}`, {
     method: "GET",
   });
+  return normalizeDestinationRecord(data);
 }
 
 export async function createDestination(payload: DestinationPayload) {
@@ -453,9 +502,10 @@ export async function deleteConsultant(id: number) {
 }
 
 export async function getSiteContent() {
-  return request<SiteContentRecord>("/api/site-content", {
+  const data = await request<SiteContentRecord>("/api/site-content", {
     method: "GET",
   });
+  return normalizeSiteContentRecord(data);
 }
 
 export async function updateSiteContent(payload: SiteContentRecord) {

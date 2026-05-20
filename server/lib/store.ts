@@ -230,6 +230,44 @@ type MongoStoreDocument = AppStore & { _id: string };
 
 let mongoClientPromise: Promise<MongoClient> | null = null;
 
+function normalizeStringArray(value: unknown, fallback: string[] = []): string[] {
+  if (!Array.isArray(value)) {
+    return [...fallback];
+  }
+
+  return value.map((item) => String(item).trim()).filter(Boolean);
+}
+
+function normalizeSiteMetrics(value: unknown, fallback: SiteMetricRecord[]): SiteMetricRecord[] {
+  if (!Array.isArray(value)) {
+    return cloneStore({ ...seedStore, siteContent: { ...seedStore.siteContent, metrics: fallback } }).siteContent.metrics;
+  }
+
+  const normalized = value
+    .map((metric) => ({
+      value: typeof metric?.value === "string" ? metric.value : "",
+      label: typeof metric?.label === "string" ? metric.label : "",
+    }))
+    .filter((metric) => metric.value || metric.label);
+
+  return normalized.length > 0 ? normalized : fallback;
+}
+
+function normalizeSiteServices(value: unknown, fallback: SiteServiceRecord[]): SiteServiceRecord[] {
+  if (!Array.isArray(value)) {
+    return cloneStore({ ...seedStore, siteContent: { ...seedStore.siteContent, services: fallback } }).siteContent.services;
+  }
+
+  const normalized = value
+    .map((service) => ({
+      title: typeof service?.title === "string" ? service.title : "",
+      text: typeof service?.text === "string" ? service.text : "",
+    }))
+    .filter((service) => service.title || service.text);
+
+  return normalized.length > 0 ? normalized : fallback;
+}
+
 const seedStore: AppStore = {
   users: [
     {
@@ -601,6 +639,22 @@ function normalizeStore(store: AppStore): boolean {
     store.siteContent.aboutHighlights = cloneStore(seedStore).siteContent.aboutHighlights;
     changed = true;
   }
+  const seedSiteContent = cloneStore(seedStore).siteContent;
+  const normalizedMetrics = normalizeSiteMetrics(store.siteContent.metrics, seedSiteContent.metrics);
+  if (JSON.stringify(normalizedMetrics) !== JSON.stringify(store.siteContent.metrics)) {
+    store.siteContent.metrics = normalizedMetrics;
+    changed = true;
+  }
+  const normalizedServices = normalizeSiteServices(store.siteContent.services, seedSiteContent.services);
+  if (JSON.stringify(normalizedServices) !== JSON.stringify(store.siteContent.services)) {
+    store.siteContent.services = normalizedServices;
+    changed = true;
+  }
+  const normalizedAboutHighlights = normalizeStringArray(store.siteContent.aboutHighlights, seedSiteContent.aboutHighlights);
+  if (JSON.stringify(normalizedAboutHighlights) !== JSON.stringify(store.siteContent.aboutHighlights)) {
+    store.siteContent.aboutHighlights = normalizedAboutHighlights;
+    changed = true;
+  }
   if (!store.siteContent.footerTagline) {
     store.siteContent.footerTagline = cloneStore(seedStore).siteContent.footerTagline;
     changed = true;
@@ -632,6 +686,37 @@ function normalizeStore(store: AppStore): boolean {
   if (!store.consultants) {
     store.consultants = cloneStore(seedStore).consultants;
     changed = true;
+  }
+
+  for (const destination of store.destinations) {
+    const normalizedHighlights = normalizeStringArray(destination.highlights);
+    if (JSON.stringify(normalizedHighlights) !== JSON.stringify(destination.highlights)) {
+      destination.highlights = normalizedHighlights;
+      changed = true;
+    }
+
+    const normalizedUniversities = normalizeStringArray(destination.universities);
+    if (JSON.stringify(normalizedUniversities) !== JSON.stringify(destination.universities)) {
+      destination.universities = normalizedUniversities;
+      changed = true;
+    }
+
+    const normalizedRequirements = normalizeStringArray(destination.requirements);
+    if (JSON.stringify(normalizedRequirements) !== JSON.stringify(destination.requirements)) {
+      destination.requirements = normalizedRequirements;
+      changed = true;
+    }
+
+    const normalizedWorkOptions = normalizeStringArray(destination.workOptions);
+    if (JSON.stringify(normalizedWorkOptions) !== JSON.stringify(destination.workOptions)) {
+      destination.workOptions = normalizedWorkOptions;
+      changed = true;
+    }
+
+    if (!destination.accent) {
+      destination.accent = "from-blue-50 to-slate-50";
+      changed = true;
+    }
   }
 
   for (const inquiry of store.inquiries) {
